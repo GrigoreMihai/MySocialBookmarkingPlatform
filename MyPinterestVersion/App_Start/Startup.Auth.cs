@@ -56,7 +56,7 @@ namespace MyPinterestVersion
 
             app.UseFacebookAuthentication(
                appId: "965596340466366",
-               appSecret: "9a535283b7ed52701982e2c383c80434");
+               appSecret: "9a535283b7ed52701982e2c383c80434"); //change it with actual one when running
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{
