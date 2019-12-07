@@ -33,18 +33,12 @@ namespace MyPinterestVersion
                     UserManager.AddToRole(user.Id, "Administrator");
                 }
             }
-            if (!roleManager.RoleExists("Editor"))
+            if (!roleManager.RoleExists("RegisteredUser"))
             {
                 var role = new IdentityRole();
-                role.Name = "Editor";
+                role.Name = "RegisteredUser";
                 roleManager.Create(role);
-            }
-            if (!roleManager.RoleExists("User"))
-            {
-                var role = new IdentityRole();
-                role.Name = "User";
-                roleManager.Create(role);
-            }
+            }         
         }
         public void Configuration(IAppBuilder app)
         {
