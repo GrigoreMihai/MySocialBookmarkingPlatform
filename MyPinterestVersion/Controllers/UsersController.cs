@@ -79,5 +79,22 @@ namespace MyPinterestVersion.Controllers
                 return View(user);
             }
         }
+        [Authorize(Roles = "Administrator")]
+        public ActionResult Delete(string id)
+        {
+            ApplicationUser user = db.Users.Find(id);
+            if (User.IsInRole("Administrator"))
+            {
+                db.Users.Remove(user);
+                db.SaveChanges();
+                TempData["message"] = "userul a fost sters!";
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                TempData["message"] = "Nu aveti dreptul sa stergeti un user";
+                return RedirectToAction("Index");
+            }
+        }
     }
 }

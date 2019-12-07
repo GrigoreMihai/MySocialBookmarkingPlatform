@@ -12,7 +12,7 @@ using MyPinterestVersion.Models;
 
 namespace MyPinterestVersion.Controllers
 {
-    [Authorize]
+    [Authorize] 
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
