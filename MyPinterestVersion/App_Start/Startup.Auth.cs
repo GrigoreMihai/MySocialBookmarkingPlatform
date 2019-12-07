@@ -54,9 +54,15 @@ namespace MyPinterestVersion
             //   consumerKey: "",
             //   consumerSecret: "");
 
+<<<<<<< Updated upstream
             //app.UseFacebookAuthentication(
             //   appId: "",
             //   appSecret: "");
+=======
+           // app.UseFacebookAuthentication(
+            //   appId: "",
+            //   appSecret: ""); //uncoment and add stuff but dont push to git 
+>>>>>>> Stashed changes
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{
