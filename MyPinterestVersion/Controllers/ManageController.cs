@@ -15,11 +15,24 @@ namespace MyPinterestVersion.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
+        private ApplicationDbContext db = ApplicationDbContext.Create();
         public ManageController()
         {
         }
+        public ActionResult ViewManageBookmark()
+        {
+            //Include("Category").Include("User");
+            var currentUserId = User.Identity.GetUserId(); //no idea when var got so popular in reached C#
+                                                    //long live js mess hope it gets everywhere
+            var bookmarks = db.Bookmarks.Where(bk => bk.UserId == currentUserId );
+            if (TempData.ContainsKey("message"))
+            {
+                ViewBag.message = TempData["message"].ToString();
+            }
+            ViewBag.Bookmarks = bookmarks;
 
+            return View(bookmarks.ToList<Bookmark>());           
+        }
         public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;

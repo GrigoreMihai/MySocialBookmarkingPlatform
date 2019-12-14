@@ -27,7 +27,7 @@ namespace MyPinterestVersion.Models
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
-        
+        public DbSet<Bookmark> Bookmarks { get; set; }
         //public DbSet<Article> Articles { get; set; }       //here when adding models
         // public DbSet<Category> Categories { get; set; }
 

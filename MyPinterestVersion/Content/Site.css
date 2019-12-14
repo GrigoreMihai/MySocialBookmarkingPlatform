@@ -22,3 +22,8 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.my-button {
+    background-color : forestgreen !important;
+    text-decoration-color: white !important;
+}
