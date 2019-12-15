@@ -21,5 +21,9 @@ namespace MyPinterestVersion.Models
         public string UserId { get; set; }
         public virtual ApplicationUser User { get; set; }
 
+        public int ImageId { get; set; }
+
+        public virtual Image Image { get; set; }
+
     }
 }

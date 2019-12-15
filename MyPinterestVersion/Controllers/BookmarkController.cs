@@ -12,26 +12,6 @@ namespace MyPinterestVersion.Controllers
         public ActionResult Index()
         {
             return View();
-        }
-        //public ActionResult Add()
-        //{
-        //    return RedirectToAction();
-        //}
-        //public ActionResult FileUpload(HttpPostedFileBase file)
-        //{
-
-        //    if (file != null)
-        //    {
-                
-        //        string ImageName = System.IO.Path.GetFileName(file.FileName);
-        //        string physicalPath = Server.MapPath("~/images/" + ImageName);
-
-        //        // save image in folder
-        //        file.SaveAs(physicalPath);
-
-        //    }
-        //    //Display records
-        //    return RedirectToAction("../home/");
-        //}
+        }       
     }
 }

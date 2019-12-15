@@ -28,6 +28,7 @@ namespace MyPinterestVersion.Models
         {
         }
         public DbSet<Bookmark> Bookmarks { get; set; }
+        public DbSet<Image> Images { get; set; }
         //public DbSet<Article> Articles { get; set; }       //here when adding models
         // public DbSet<Category> Categories { get; set; }
 

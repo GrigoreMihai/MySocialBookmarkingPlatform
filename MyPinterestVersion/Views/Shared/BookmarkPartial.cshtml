@@ -1,9 +1,9 @@
 ﻿<div class="panel panel-default">
-    <div class="panel-heading">@Model.Title</div>
+    <div class="panel-heading">Bookmark Title: @Model.Title</div>
     <div class="panel-body">
-        Continut articol: <strong>@Model.Description</strong>
+        Description: <strong>@Model.Description</strong>
         <br />
-        @*<span class="label label-success">@Model.Date</span>*@
+       <div> Rating: <span class="label label-success">@Model.Note</span> </div>
         <br />
        @* <i class="glyphicon glyphicon-globe"></i> @Model.Category.CategoryName*@
       @*  <i class="glyphicon glyphicon-user"></i> <i>bookmark added by</i> <strong> @Model.User.UserName </strong>*@

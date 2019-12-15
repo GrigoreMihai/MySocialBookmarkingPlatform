@@ -21,7 +21,7 @@ namespace MyPinterestVersion.Controllers
         }
         public ActionResult ViewManageBookmark()
         {
-            //Include("Category").Include("User");
+            //Include("Tag").Include("User");
             var currentUserId = User.Identity.GetUserId(); //no idea when var got so popular in reached C#
                                                     //long live js mess hope it gets everywhere
             var bookmarks = db.Bookmarks.Where(bk => bk.UserId == currentUserId );
