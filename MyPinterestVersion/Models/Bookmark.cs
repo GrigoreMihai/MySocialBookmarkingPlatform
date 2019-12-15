@@ -15,8 +15,7 @@ namespace MyPinterestVersion.Models
         [StringLength(20, ErrorMessage = "Titlul nu poate avea mai mult de 20 de caractere")]
         public string Title { get; set; }
         [Required(ErrorMessage = "Descrierea este obligatorie")]
-        public string Description { get; set; }
-        public string PicturePath { get; set; }
+        public string Description { get; set; }        
         public int Note { get; set; }
         public string UserId { get; set; }
         public virtual ApplicationUser User { get; set; }

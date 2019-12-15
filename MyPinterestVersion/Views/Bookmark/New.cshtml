@@ -1,0 +1,28 @@
+﻿@model MyPinterestVersion.Models.Bookmark
+
+@{ ViewBag.Titlu = "Adaugare bookmark"; }
+
+<h2>@ViewBag.Titlu</h2> <br />
+
+@using (Html.BeginForm(actionName: "New", controllerName: "Bookmark"))
+{
+    @Html.HiddenFor(m => m.UserId)
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+    @Html.Label("Title", "Bookmark Title") <br />
+    @Html.TextBox("Title", null, new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.Title, "", new { @class = "text-danger" })
+    <br /><br />
+
+    @Html.Label("Description", "Bookmark Description") <br />
+    @Html.TextArea("Description", null, new { @class = "form-control" })
+    @Html.ValidationMessage("Description", "", new { @class = "text-danger" }) <br /><br />
+
+    @*Html.Hidden("Date", DateTime.Now, new { @class = "form-control" }) //for selecting the tag when i add it
+        <label>Selectati categoria</label>
+
+        @Html.DropDownListFor(m => m.CategoryId, new SelectList(Model.Categories, "Value", "Text"), "Selectati categoria", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.CategoryId, "", new { @class = "text-danger" }) <br />
+    *@   
+    <button class="btn btn-sm btn-success" type="submit">Add bookmark</button>
+}

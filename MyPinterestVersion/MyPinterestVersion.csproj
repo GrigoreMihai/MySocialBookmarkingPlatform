@@ -247,6 +247,7 @@
     <Content Include="Views\Shared\BookmarkPartial.cshtml" />
     <Content Include="Views\Image\Add.cshtml" />
     <Content Include="Views\Image\View.cshtml" />
+    <Content Include="Views\Bookmark\New.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

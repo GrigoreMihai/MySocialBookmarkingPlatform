@@ -24,7 +24,7 @@ namespace MyPinterestVersion.Controllers
             //Include("Tag").Include("User");
             var currentUserId = User.Identity.GetUserId(); //no idea when var got so popular in reached C#
                                                     //long live js mess hope it gets everywhere
-            var bookmarks = db.Bookmarks.Where(bk => bk.UserId == currentUserId );
+            var bookmarks = db.Bookmarks.Include("Image").Where(bk => bk.UserId == currentUserId );
             if (TempData.ContainsKey("message"))
             {
                 ViewBag.message = TempData["message"].ToString();

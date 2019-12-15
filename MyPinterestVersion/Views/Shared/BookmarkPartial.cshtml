@@ -3,10 +3,13 @@
     <div class="panel-body">
         Description: <strong>@Model.Description</strong>
         <br />
-       <div> Rating: <span class="label label-success">@Model.Note</span> </div>
+        <div>
+            <img src="@Url.Content(Model.Image.ImagePath)" width="250" height="250" multiple />
+        </div>
+        <div> Rating: <span class="label label-success">@Model.Note</span> </div>
         <br />
-       @* <i class="glyphicon glyphicon-globe"></i> @Model.Category.CategoryName*@
-      @*  <i class="glyphicon glyphicon-user"></i> <i>bookmark added by</i> <strong> @Model.User.UserName </strong>*@
+        @* <i class="glyphicon glyphicon-globe"></i> @Model.Category.CategoryName*@
+        @*  <i class="glyphicon glyphicon-user"></i> <i>bookmark added by</i> <strong> @Model.User.UserName </strong>*@
     </div>
     <div class="panel-footer">
         @*<a class="btn btn-sm btn-success" href="/Bookmark/Show/@Model.Id">Show bookmark</a>*@
