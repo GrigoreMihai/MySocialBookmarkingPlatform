@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace MyPinterestVersion.Models
 {
@@ -23,6 +24,7 @@ namespace MyPinterestVersion.Models
         public int ImageId { get; set; }
 
         public virtual Image Image { get; set; }
-
+        
+        public IEnumerable<SelectListItem> Tags { get; set; }
     }
 }

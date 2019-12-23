@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyPinterestVersion.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,11 +7,14 @@ using System.Web.Mvc;
 
 namespace MyPinterestVersion.Controllers
 {
+    
     public class HomeController : Controller
     {
+        private ApplicationDbContext db = ApplicationDbContext.Create();
         public ActionResult Index()
         {
-            return View();
+            var bookmarks = db.Bookmarks.Include("Image");
+            return View((bookmarks.ToList<Bookmark>()));
         }
 
         public ActionResult About()
