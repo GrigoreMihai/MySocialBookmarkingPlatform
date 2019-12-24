@@ -8,6 +8,8 @@
 {
     @Html.HiddenFor(m => m.UserId)
     @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+    @Html.HiddenFor(m => m.ImageId)
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
 
     @Html.Label("Title", "Bookmark Title") <br />
     @Html.TextBox("Title", null, new { @class = "form-control" })
@@ -23,6 +25,6 @@
 
         @Html.DropDownListFor(m => m.CategoryId, new SelectList(Model.Categories, "Value", "Text"), "Selectati categoria", new { @class = "form-control" })
         @Html.ValidationMessageFor(m => m.CategoryId, "", new { @class = "text-danger" }) <br />
-    *@   
+    *@
     <button class="btn btn-sm btn-success" type="submit">Add bookmark</button>
 }

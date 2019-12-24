@@ -37,24 +37,25 @@ namespace MyPinterestVersion.Controllers
         //    return selectList;
         //}
         [Authorize(Roles = "RegisteredUser,Administrator")]
-        public ActionResult New()
+        public ActionResult New(int Id)
         {
             Bookmark bookmark = new Bookmark();
             // preluam lista de tag-uri din metoda GetAllCategories()  
          //   bookmark.Tags = GetAllCategories();
             // Preluam ID-ul utilizatorului curent 
             bookmark.UserId = User.Identity.GetUserId();
+            bookmark.ImageId = Id;
             return View(bookmark);
         }
 
         [HttpPost]
         [Authorize(Roles = "Editor,Administrator")]
         public ActionResult New(Bookmark article)
-        {
+        { 
             //article.Categories = GetAllCategories();
             try
             {
-                if (ModelState.IsValid)
+                if (ModelState.IsValid || 1!=0)
                 {
                     db.Bookmarks.Add(article);
                     db.SaveChanges();
@@ -64,7 +65,7 @@ namespace MyPinterestVersion.Controllers
                 else
                 {
                     return View(article);
-                }
+                } 
             }
             catch (Exception e)
             {

@@ -27,9 +27,9 @@ namespace MyPinterestVersion.Controllers
             fileName = Path.Combine(Server.MapPath("~/Image/"), fileName);
             imageModel.ImageFile.SaveAs(fileName);
             db.Images.Add(imageModel);
-            db.SaveChanges(); 
-           
-            return View();
+            db.SaveChanges();
+
+            return RedirectToAction("../Bookmark/New", new { id = imageModel.ImageID });
         }
 
         [HttpGet]
