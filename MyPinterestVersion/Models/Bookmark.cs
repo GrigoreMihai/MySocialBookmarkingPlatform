@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -18,13 +19,16 @@ namespace MyPinterestVersion.Models
         [Required(ErrorMessage = "Descrierea este obligatorie")]
         public string Description { get; set; }        
         public int Note { get; set; }
+        public DateTime Date { get; set; }
         public string UserId { get; set; }
         public virtual ApplicationUser User { get; set; }
 
         public int ImageId { get; set; }
 
         public virtual Image Image { get; set; }
-        
-        public IEnumerable<SelectListItem> Tags { get; set; }
+        //[NotMapped]
+        //public int[] TagId;
+        [NotMapped]
+        public List<SelectListItem> Tags { get; set; }
     }
 }
