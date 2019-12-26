@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -24,14 +25,28 @@ namespace MyPinterestVersion.Controllers
             //Include("Tag").Include("User");
             var currentUserId = User.Identity.GetUserId(); //no idea when var got so popular in reached C#
                                                     //long live js mess hope it gets everywhere
-            var bookmarks = db.Bookmarks.Include("Image").Where(bk => bk.UserId == currentUserId );
-            if (TempData.ContainsKey("message"))
-            {
-                ViewBag.message = TempData["message"].ToString();
-            }
-            ViewBag.Bookmarks = bookmarks;
+            var bookmarks = db.Bookmarks.Include("Image").Where(bk => bk.UserId == currentUserId ).ToList<Bookmark>();          
 
-            return View(bookmarks.ToList<Bookmark>());           
+            for (int i = 0; i < bookmarks.Capacity-1; i++)
+            {
+
+                var temp = bookmarks[i].Id;
+                var Tags = db.BookmarkTagLinks.Where(c => c.BookmarkId == temp).ToList<BookmarkTagLink>();
+
+                //if (Tags.Capacity == 0)
+                //{
+                //    bookmarks[i].TagsNames = new List<string>(1);
+                //    bookmarks[i].TagsNames.Add("test");
+                //}
+                foreach (BookmarkTagLink tag in Tags)
+                {
+                    //System.Diagnostics.Debug.WriteLine(tag.Id);
+                    var TagsFull = db.Tags.Where(c => c.Id == tag.TagId).Select(c => c.Name).ToList<string>();
+
+                    bookmarks[i].TagsNames = TagsFull;
+                }
+            }
+            return View(bookmarks);
         }
         public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {

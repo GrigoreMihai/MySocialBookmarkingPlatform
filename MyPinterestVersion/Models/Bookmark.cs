@@ -24,10 +24,10 @@ namespace MyPinterestVersion.Models
         public virtual ApplicationUser User { get; set; }
 
         public int ImageId { get; set; }
-
+        
         public virtual Image Image { get; set; }
-        //[NotMapped]
-        //public int[] TagId;
+        [NotMapped]
+        public List<String> TagsNames { get; set; }
         [NotMapped]
         public List<SelectListItem> Tags { get; set; }
     }

@@ -88,7 +88,7 @@ namespace MyPinterestVersion.Controllers
             catch (Exception e)
             {
 
-                System.Diagnostics.Debug.WriteLine(e);
+                
                 return View(bookmark);
             }
         }
