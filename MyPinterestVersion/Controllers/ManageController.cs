@@ -8,6 +8,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using MyPinterestVersion.Models;
+using PagedList;
 
 namespace MyPinterestVersion.Controllers
 {
@@ -20,14 +21,16 @@ namespace MyPinterestVersion.Controllers
         public ManageController()
         {
         }
-        public ActionResult ViewManageBookmark()
+        public ActionResult ViewManageBookmark(int? page)
         {
             //Include("Tag").Include("User");
             var currentUserId = User.Identity.GetUserId(); //no idea when var got so popular in reached C#
                                                     //long live js mess hope it gets everywhere
-            var bookmarks = db.Bookmarks.Include("Image").Where(bk => bk.UserId == currentUserId ).ToList<Bookmark>();          
+            var bookmarks = db.Bookmarks.Include("Image").Where(bk => bk.UserId == currentUserId ).ToList<Bookmark>();
 
-            for (int i = 0; i < bookmarks.Capacity-1; i++)
+            int num = bookmarks.Count();
+
+            for (int i = 0; i < num; i++)
             {
 
                 var temp = bookmarks[i].Id;
@@ -38,15 +41,19 @@ namespace MyPinterestVersion.Controllers
                 //    bookmarks[i].TagsNames = new List<string>(1);
                 //    bookmarks[i].TagsNames.Add("test");
                 //}
+                bookmarks[i].TagsNames = new List<string>();
                 foreach (BookmarkTagLink tag in Tags)
                 {
                     //System.Diagnostics.Debug.WriteLine(tag.Id);
                     var TagsFull = db.Tags.Where(c => c.Id == tag.TagId).Select(c => c.Name).ToList<string>();
 
-                    bookmarks[i].TagsNames = TagsFull;
+                    bookmarks[i].TagsNames.Add(TagsFull[0]);
                 }
             }
-            return View(bookmarks);
+            int pageSize = 6;
+            int pageNumber = (page ?? 1);
+            return View(bookmarks.ToPagedList(pageNumber, pageSize));
+            //return View(bookmarks);
         }
         public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {

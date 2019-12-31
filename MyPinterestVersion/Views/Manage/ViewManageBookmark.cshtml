@@ -1,23 +1,28 @@
 ﻿@using Microsoft.AspNet.Identity
-@model  IList<MyPinterestVersion.Models.Bookmark>
+@model PagedList.IPagedList<MyPinterestVersion.Models.Bookmark>
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "All user bookmarks";
 }
 
-    @for (int i = 0; i < Model.Count(); i += 3)
-    {
-        <div class="row">
-            @{
-                int j = 0;
-                for (; j <= 2 && i + j < Model.Count(); j++)
-                {
-                    <div class="col-md-4">
-                        @Html.Partial("BookmarkPartial", Model[i + j])
-                    </div>
-                }
+@for (int i = 0; i < Model.Count(); i += 3)
+{
+    <div class="row">
+        @{
+            int j = 0;
+            for (; j <= 2 && i + j < Model.Count(); j++)
+            {
+                <div class="col-md-4">
+                    @Html.Partial("BookmarkPartial", Model[i + j])
+                </div>
             }
-        </div>
-    }
+        }
+    </div>
+}
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("ViewManageBookmark",
+    new { page }))
 
 
 

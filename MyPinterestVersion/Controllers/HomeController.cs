@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using PagedList;
 using System.Web;
 using System.Web.Mvc;
 
@@ -11,11 +12,11 @@ namespace MyPinterestVersion.Controllers
     public class HomeController : Controller
     {
         private ApplicationDbContext db = ApplicationDbContext.Create();
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
             var bookmarks = db.Bookmarks.Include("Image").ToList<Bookmark>();
-            
-            for (int i=0;i<bookmarks.Capacity-1;i++)
+            int num = bookmarks.Count();
+            for (int i=0;i<num;i++)
             {
                 
                 var temp = bookmarks[i].Id;
@@ -35,7 +36,10 @@ namespace MyPinterestVersion.Controllers
                     bookmarks[i].TagsNames.Add(TagsFull[0]);
                 }
             }
-            return View(bookmarks);
+            int pageSize = 6;
+            int pageNumber = (page ?? 1);
+            return View(bookmarks.ToPagedList(pageNumber, pageSize));
+            //return View(bookmarks);
         }
 
         public ActionResult About()

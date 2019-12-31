@@ -103,3 +103,7 @@ F:\Desktop\MyPinterestVersion\MyPinterestVersion\obj\Debug\MyPinterestVersion.cs
 F:\Desktop\MyPinterestVersion\MyPinterestVersion\obj\Debug\MyPinterestVersion.csproj.CopyComplete
 F:\Desktop\MyPinterestVersion\MyPinterestVersion\obj\Debug\MyPinterestVersion.dll
 F:\Desktop\MyPinterestVersion\MyPinterestVersion\obj\Debug\MyPinterestVersion.pdb
+F:\Desktop\MyPinterestVersion\MyPinterestVersion\bin\PagedList.dll
+F:\Desktop\MyPinterestVersion\MyPinterestVersion\bin\PagedList.Mvc.dll
+F:\Desktop\MyPinterestVersion\MyPinterestVersion\bin\PagedList.xml
+F:\Desktop\MyPinterestVersion\MyPinterestVersion\bin\PagedList.Mvc.xml
