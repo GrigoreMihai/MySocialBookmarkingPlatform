@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace MyPinterestVersion.Controllers
 {
+    [Authorize]
     public class ImageController : Controller
     {
         private ApplicationDbContext db = ApplicationDbContext.Create();
@@ -16,7 +17,7 @@ namespace MyPinterestVersion.Controllers
         {
             return View();
         }
-
+        [Authorize(Roles = "RegisteredUser,Administrator")]
         [HttpPost]
         public ActionResult Add(Image imageModel)
         {
@@ -31,7 +32,7 @@ namespace MyPinterestVersion.Controllers
 
             return RedirectToAction("../Bookmark/New", new { id = imageModel.ImageID });
         }
-
+        [Authorize(Roles = "RegisteredUser,Administrator")]
         [HttpGet]
         public ActionResult View(int id)
         {

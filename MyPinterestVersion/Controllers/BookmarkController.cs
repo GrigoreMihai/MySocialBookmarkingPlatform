@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace MyPinterestVersion.Controllers
 {
+    [Authorize]
     public class BookmarkController : Controller
     {
         
@@ -59,7 +60,7 @@ namespace MyPinterestVersion.Controllers
             //bookmark.Tags = GetAllCategories();
             try
             {
-                if (ModelState.IsValid || 1!=0)
+                if (ModelState.IsValid)
                 {
                     db.Bookmarks.Add(bookmark);
                     db.SaveChanges();

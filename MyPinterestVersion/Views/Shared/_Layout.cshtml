@@ -24,6 +24,14 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li style="padding-top:1em; padding-left:3em;">
+                        <form asp-controller="Home" asp-action="Index" style="color:white;">
+                            <p>
+                                Search by Tag: <input type="text" name="SearchString">
+                                <input style="color:green" type="submit" value="Search" />
+                            </p>
+                        </form>
+                    </li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

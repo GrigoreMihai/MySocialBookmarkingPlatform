@@ -7,7 +7,7 @@
             <img src="@Url.Content(Model.Image.ImagePath)" width="250" height="250" multiple />
         </div>
         <div> Rating: <span class="label label-success">@Model.Note</span> </div>
-        <br />
+        
         <div>Tags: 
     @if (Model.TagsNames.Count >= 0)
     {
@@ -20,7 +20,10 @@
         }
 
     }
- </div>
+      </div> 
+        <div>
+            <span class="label label-success">@Model.Date</span>
+        </div>
        
           <i class="glyphicon glyphicon-user"></i> <i>bookmark added by</i> <strong> @Model.User.UserName </strong>
     </div>
