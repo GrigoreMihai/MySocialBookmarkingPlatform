@@ -18,17 +18,21 @@ namespace MyPinterestVersion.Models
         public string Title { get; set; }
         [Required(ErrorMessage = "Descrierea este obligatorie")]
         public string Description { get; set; }        
-        public int Note { get; set; }
+        public int Note { get; set; }          
         public DateTime Date { get; set; }
         public string UserId { get; set; }
         public virtual ApplicationUser User { get; set; }
 
-        public int ImageId { get; set; }
-        
+        public int ImageId { get; set; }        
         public virtual Image Image { get; set; }
         [NotMapped]
         public List<String> TagsNames { get; set; }
         [NotMapped]
         public List<SelectListItem> Tags { get; set; }
+        [NotMapped]
+        
+        [Required(ErrorMessage = "You can not comment without writing a comment")]
+        [StringLength(20, ErrorMessage = "Comment can not be longer than 20 characters")]
+        public string Comment;
     }
 }

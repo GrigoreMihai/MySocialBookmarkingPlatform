@@ -187,6 +187,7 @@
     <Compile Include="Models\BookmarkTagLink.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\CategoryUserBookmarkLink.cs" />
+    <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -259,6 +260,7 @@
     <Content Include="Views\Image\Add.cshtml" />
     <Content Include="Views\Image\View.cshtml" />
     <Content Include="Views\Bookmark\New.cshtml" />
+    <Content Include="Views\Bookmark\Show.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

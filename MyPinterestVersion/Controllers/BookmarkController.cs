@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace MyPinterestVersion.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "RegisteredUser,Administrator")]
     public class BookmarkController : Controller
     {
         
@@ -17,6 +17,50 @@ namespace MyPinterestVersion.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+        public ActionResult VoteUp(Bookmark bookmark)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    Bookmark book = db.Bookmarks.Find(bookmark.Id);
+                    if (TryUpdateModel(book))
+                    {
+                        book.Note++;
+                        db.SaveChanges();
+                        TempData["message"] = "Articolul a fost modificat!";
+                    }
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Show", new { id = bookmark.Id });
+            }
+            return RedirectToAction("Show", new { id = bookmark.Id });
+        }
+        public ActionResult AddComment(Bookmark bookmark)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    Comment comment = new Comment { CommentBody = bookmark.Comment, BookmarkId = bookmark.Id };
+                    comment.CommentBody = bookmark.Comment;
+                    //db.Comments.Add(comment);
+                    db.SaveChanges();
+                    TempData["message"] = "Your comment has been added";
+                    return RedirectToAction("Show", new { id = bookmark.Id });
+                                    
+                }
+                
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Show", new { id = bookmark.Id});
+            }
+            return RedirectToAction("Show", new { id = bookmark.Id });
         }
         [NonAction]
         public List<SelectListItem> GetAllCategories()
@@ -78,7 +122,7 @@ namespace MyPinterestVersion.Controllers
                    
                     
                     }
-                    TempData["message"] = "Articolul a fost adaugat!";
+                    TempData["message"] = "Bookmark has been added!";
                     return RedirectToAction("../Manage/ViewManageBookmark");
                 }
                 else
@@ -87,11 +131,38 @@ namespace MyPinterestVersion.Controllers
                 } 
             }
             catch (Exception e)
-            {
-
-                
+            {               
                 return View(bookmark);
             }
+        }
+        [Authorize(Roles = "RegisteredUser,Administrator")]
+        public ActionResult Show(int id)
+        {
+            var bookmark = db.Bookmarks.Include("Image").SingleOrDefault(x => x.Id == id);
+
+
+
+
+            var temp = id;
+                var Tags = db.BookmarkTagLinks.Where(c => c.BookmarkId == temp).ToList<BookmarkTagLink>();
+               
+                bookmark.TagsNames = new List<string>();
+                
+                foreach (BookmarkTagLink tag in Tags)
+                {
+
+                    var TagsFull = db.Tags.Where(c => c.Id == tag.TagId).Select(c => c.Name).ToList<string>();
+                   
+                    bookmark.TagsNames.Add(TagsFull[0]);
+                }
+                
+            
+
+           
+
+            ViewBag.esteAdmin = User.IsInRole("Administrator"); ViewBag.utilizatorCurent = User.Identity.GetUserId();
+
+            return View(bookmark);
         }
     }
 }
