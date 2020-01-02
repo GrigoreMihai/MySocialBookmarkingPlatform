@@ -3,7 +3,7 @@
 @{ ViewBag.Titlu = "Bookmark details"; }
 @if (TempData.ContainsKey("message"))
 {
-    <h3 class="alert alert-info" role="alert">TempData.message</h3>
+    <h3 class="alert alert-info" role="alert">@ViewBag.message</h3>
 }
 <h2 style="color:green">@ViewBag.Titlu</h2>
 

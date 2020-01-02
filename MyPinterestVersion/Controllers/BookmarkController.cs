@@ -40,15 +40,17 @@ namespace MyPinterestVersion.Controllers
             }
             return RedirectToAction("Show", new { id = bookmark.Id });
         }
+        
         public ActionResult AddComment(Bookmark bookmark)
         {
+            System.Diagnostics.Debug.WriteLine("jshdhjs");
             try
             {
                 if (ModelState.IsValid)
                 {
                     Comment comment = new Comment { CommentBody = bookmark.Comment, BookmarkId = bookmark.Id };
                     comment.CommentBody = bookmark.Comment;
-                    //db.Comments.Add(comment);
+                    db.Comments.Add(comment);
                     db.SaveChanges();
                     TempData["message"] = "Your comment has been added";
                     return RedirectToAction("Show", new { id = bookmark.Id });
@@ -123,6 +125,7 @@ namespace MyPinterestVersion.Controllers
                     
                     }
                     TempData["message"] = "Bookmark has been added!";
+                    
                     return RedirectToAction("../Manage/ViewManageBookmark");
                 }
                 else
