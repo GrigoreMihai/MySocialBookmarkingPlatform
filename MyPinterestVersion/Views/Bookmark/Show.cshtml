@@ -1,0 +1,77 @@
+﻿@model MyPinterestVersion.Models.Bookmark
+
+@{ ViewBag.Titlu = "Bookmark details"; }
+@if (TempData.ContainsKey("message"))
+{
+    <h3 class="alert alert-info" role="alert">TempData.message</h3>
+}
+<h2 style="color:green">@ViewBag.Titlu</h2>
+
+<br />
+
+<div class="panel panel-default">
+    <div class="panel-heading">Bookmark Title: @Model.Title</div>
+    <div class="panel-body">
+        Description: <strong>@Model.Description</strong>
+        <br />
+        <div>
+            <img src="@Url.Content(Model.Image.ImagePath)" width="250" height="250" multiple />
+        </div>
+        <div> Rating: <span class="label label-success">@Model.Note</span> </div>
+
+        <div>
+            Tags:
+            @if (Model.TagsNames.Count >= 0)
+            {
+
+                for (int i = 0; i < Model.TagsNames.Count; i++)
+                {
+                    <span class="label label-success">
+                        @Model.TagsNames[i]
+                    </span>
+                }
+
+            }
+        </div>
+        <div>
+            <span class="label label-success">@Model.Date</span>
+        </div>
+
+        <i class="glyphicon glyphicon-user"></i> <i>bookmark added by</i> <strong> @Model.User.UserName </strong>
+    </div>
+</div>
+<br />
+@if (ViewBag.esteAdmin)
+{<a class="btn btn-sm btn-info" href="/Bookmark/Edit/@Model.Id">Modifica articol</a>
+    <br />
+
+    <form method="post" action="/Bookmark/Delete/@Model.Id">
+        @Html.HttpMethodOverride(HttpVerbs.Delete)
+        <button class="btn btn-sm btn-danger" type="submit">Delete Bookmark</button>
+    </form>
+}
+@if (Request.IsAuthenticated)
+{
+    <a class="btn btn-sm btn-info" href="/Bookmark/VoteUp/@Model.Id">Vote up</a>
+    <a class="btn btn-sm btn-info" href="/Bookmark/VoteDown/@Model.Id">Vote down</a>
+    using (Html.BeginForm(actionName: "AddComment", controllerName: "Bookmark"))
+    {
+        @Html.HiddenFor(m => m.UserId)
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+        @Html.HiddenFor(m => m.Id)
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+        @Html.Label("Comment", "Comment Bookmark") <br />
+        @Html.TextBox("Comment", null, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Comment, "", new { @class = "text-danger" })
+        <button class="btn btn-sm btn-success" type="submit">Add bookmark</button>
+    }
+    <br />
+}
+
+
+
+<hr />
+<a class="btn btn-sm btn-success" href="/Home/Index">Back to bookmarks</a>
+<a class="btn btn-sm btn-success" href="/Home/New">Add new bookmark</a>
+
+<br />
