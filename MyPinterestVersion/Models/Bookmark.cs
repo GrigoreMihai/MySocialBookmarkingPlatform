@@ -28,11 +28,12 @@ namespace MyPinterestVersion.Models
         [NotMapped]
         public List<String> TagsNames { get; set; }
         [NotMapped]
-        public List<SelectListItem> Tags { get; set; }
+        public List<SelectListItem> Tags { get; set; }       
         [NotMapped]
-        
-        [Required(ErrorMessage = "You can not comment without writing a comment")]
-        [StringLength(20, ErrorMessage = "Comment can not be longer than 20 characters")]
-        public string Comment;
+        public string Comment { get; set; }
+        [NotMapped]
+        public List<Comment> CommentsList { get; set; }
+        [NotMapped]
+        public DateTime CommentDate { get; set; }
     }
 }

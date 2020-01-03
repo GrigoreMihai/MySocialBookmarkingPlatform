@@ -34,6 +34,14 @@ namespace MyPinterestVersion.Controllers
             {
 
                 var temp = bookmarks[i].Id;
+                var comments = db.Comments.Where(m => m.BookmarkId == temp);
+                bookmarks[i].CommentsList = new List<Comment>();
+                if (comments.Count() > 0)
+                {
+                   
+                    bookmarks[i].CommentsList = comments.ToList<Comment>();
+                    ViewBag.hasComments = true;
+                }
                 var Tags = db.BookmarkTagLinks.Where(c => c.BookmarkId == temp).ToList<BookmarkTagLink>();
 
                 //if (Tags.Capacity == 0)

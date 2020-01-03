@@ -18,54 +18,74 @@ namespace MyPinterestVersion.Controllers
         {
             return View();
         }
-        public ActionResult VoteUp(Bookmark bookmark)
+        public ActionResult VoteUp(int id)
         {
             try
-            {
-                if (ModelState.IsValid)
-                {
-                    Bookmark book = db.Bookmarks.Find(bookmark.Id);
+            {              
+                    Bookmark book = db.Bookmarks.Find(id);
                     if (TryUpdateModel(book))
                     {
                         book.Note++;
                         db.SaveChanges();
-                        TempData["message"] = "Articolul a fost modificat!";
+                        TempData["message"] = "Your vote has been added!";
                     }
-                    return RedirectToAction("Index");
-                }
-            }
-            catch (Exception e)
-            {
-                return RedirectToAction("Show", new { id = bookmark.Id });
-            }
-            return RedirectToAction("Show", new { id = bookmark.Id });
-        }
-        
-        public ActionResult AddComment(Bookmark bookmark)
-        {
-            System.Diagnostics.Debug.WriteLine("jshdhjs");
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    Comment comment = new Comment { CommentBody = bookmark.Comment, BookmarkId = bookmark.Id };
-                    comment.CommentBody = bookmark.Comment;
-                    db.Comments.Add(comment);
-                    db.SaveChanges();
-                    TempData["message"] = "Your comment has been added";
-                    return RedirectToAction("Show", new { id = bookmark.Id });
-                                    
-                }
+                    return RedirectToAction("Show", new { id = id });
                 
             }
             catch (Exception e)
             {
+                return RedirectToAction("Show", new { id = id });
+            }
+           
+        }
+        public ActionResult VoteDown(int id)
+        {
+            try
+            {
+               
+                 Bookmark book = db.Bookmarks.Find(id);
+                 if (TryUpdateModel(book))
+                 {
+                     book.Note--;
+                     db.SaveChanges();
+                     TempData["message"] = "Your vote has been added!";
+                 }
+                 return RedirectToAction("Show", new { id = id });
+               
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Show", new { id = id });
+            }
+            
+        }
+        [HttpPost]
+        [Authorize(Roles = "RegisteredUser,Administrator")]
+        public ActionResult AddComment(Bookmark bookmark)
+        {
+           
+            try
+            {          
+                    Comment comment = new Comment();
+                    comment.BookmarkId = bookmark.Id;
+                    System.Diagnostics.Debug.WriteLine(bookmark.Comment);
+                    comment.CommentBody = bookmark.Comment;
+                    comment.UserId = User.Identity.GetUserId();
+                    comment.Date = bookmark.CommentDate;
+                    db.Comments.Add(comment);
+                    db.SaveChanges();                    
+                    TempData["message"] = "Your comment has been added";                   
+                    return RedirectToAction("Show", new { id = bookmark.Id });
+            }
+            catch (Exception e)
+            {
+                
                 return RedirectToAction("Show", new { id = bookmark.Id});
             }
-            return RedirectToAction("Show", new { id = bookmark.Id });
+            
         }
         [NonAction]
-        public List<SelectListItem> GetAllCategories()
+        public List<SelectListItem> GetAllCategories() //GetAllTags
         {
             // generam o lista goala
             var selectList = new List<SelectListItem>();
@@ -84,7 +104,7 @@ namespace MyPinterestVersion.Controllers
             }
             // returnam lista de categorii
             return selectList;
-        }
+        }        
         [Authorize(Roles = "RegisteredUser,Administrator")]
         public ActionResult New(string Id)
         {
@@ -103,7 +123,7 @@ namespace MyPinterestVersion.Controllers
         [Authorize(Roles = "RegisteredUser,Administrator")]
         public ActionResult New(Bookmark bookmark)
         { 
-            //bookmark.Tags = GetAllCategories();
+            
             try
             {
                 if (ModelState.IsValid)
@@ -130,6 +150,7 @@ namespace MyPinterestVersion.Controllers
                 }
                 else
                 {
+                    
                     return View(bookmark);
                 } 
             }
@@ -142,11 +163,22 @@ namespace MyPinterestVersion.Controllers
         public ActionResult Show(int id)
         {
             var bookmark = db.Bookmarks.Include("Image").SingleOrDefault(x => x.Id == id);
+            var comments = db.Comments.Where(m => m.BookmarkId == id);
+            
+            if (comments.Count() > 0 )
+            {
+                bookmark.CommentsList = new List<Comment>();
+                bookmark.CommentsList = comments.ToList<Comment>();
+                ViewBag.hasComments = true;
+            }
+            if (TempData.ContainsKey("message"))
+            {
+                ViewBag.message = TempData["message"].ToString();
+            }
 
 
 
-
-            var temp = id;
+                var temp = id;
                 var Tags = db.BookmarkTagLinks.Where(c => c.BookmarkId == temp).ToList<BookmarkTagLink>();
                
                 bookmark.TagsNames = new List<string>();
@@ -164,7 +196,9 @@ namespace MyPinterestVersion.Controllers
            
 
             ViewBag.esteAdmin = User.IsInRole("Administrator"); ViewBag.utilizatorCurent = User.Identity.GetUserId();
-
+            
+            
+            
             return View(bookmark);
         }
     }

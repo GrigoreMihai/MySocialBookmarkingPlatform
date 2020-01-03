@@ -7,26 +7,56 @@
             <img src="@Url.Content(Model.Image.ImagePath)" width="250" height="250" multiple />
         </div>
         <div> Rating: <span class="label label-success">@Model.Note</span> </div>
-        
-        <div>Tags: 
-    @if (Model.TagsNames.Count >= 0)
-    {
 
-        for (int i = 0; i < Model.TagsNames.Count; i++)
-        {
-            <span class="label label-success">
-                @Model.TagsNames[i] 
-            </span>
-        }
-
-    }
-      </div> 
         <div>
-            <span class="label label-success">@Model.Date</span>
+            Tags:
+            @if (Model.TagsNames.Count >= 0)
+            {
+
+                for (int i = 0; i < Model.TagsNames.Count; i++)
+                {
+                    <span class="label label-success">
+                        @Model.TagsNames[i]
+                    </span>
+                }
+
+            }
         </div>
-       
-          <i class="glyphicon glyphicon-user"></i> <i>bookmark added by</i> <strong> @Model.User.UserName </strong>
-    </div>
+
+        @if (Model.CommentsList.Count > 0)
+        {
+        <div>
+            Comments:
+            @if (ViewBag.hasComments != null)
+            {
+            if (ViewBag.hasComments)
+            {
+
+            for (int i = 0; i < Model.CommentsList.Count; i++)
+            {
+            <div class="glyphicon-arrow-left">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <strong>@Model.CommentsList[i].User.UserName</strong> <span class="text-muted">@Model.CommentsList[i].Date</span>
+                    </div>
+                    <div class="panel-body">
+                        @Model.CommentsList[i].CommentBody
+                    </div><!-- /panel-body -->
+                </div><!-- /panel panel-default -->
+            </div><!-- /col-sm-5 -->
+            }
+            }
+
+            }
+        </div>
+         }
+           
+            <div>
+                <span class="label label-success">@Model.Date</span>
+            </div>
+
+            <i class="glyphicon glyphicon-user"></i> <i>bookmark added by</i> <strong> @Model.User.UserName </strong>
+        </div>
     <div class="panel-footer">        
         <a class="btn btn-sm btn-success" href="/Bookmark/Show/@Model.Id">Show bookmark</a>
     </div>
