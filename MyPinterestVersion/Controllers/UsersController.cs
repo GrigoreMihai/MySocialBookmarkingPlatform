@@ -79,7 +79,25 @@ namespace MyPinterestVersion.Controllers
                 return View(user);
             }
         }
-        [Authorize(Roles = "Administrator")]
+        public ActionResult Show(string id)
+        {
+            ApplicationUser user = db.Users.Find(id);
+            user.AllRoles = GetAllRoles();
+            ViewBag.utilizatorCurent = User.Identity.GetUserId();
+
+
+            var roles = db.Roles.ToList();
+
+            var roleName = roles.Where(j => j.Id ==
+               user.Roles.FirstOrDefault().RoleId).
+               Select(a => a.Name).FirstOrDefault();
+
+            ViewBag.roleName = roleName;
+
+
+            return View(user);
+        }
+        [HttpDelete]
         public ActionResult Delete(string id)
         {
             ApplicationUser user = db.Users.Find(id);

@@ -23,7 +23,24 @@ textarea {
     max-width: 280px;
 }
 
-.my-button {
-    background-color : forestgreen !important;
-    text-decoration-color: white !important;
+.field-validation-valid {
+    display: none;
 }
+
+.validation-summary-valid {
+    display: none;
+}
+
+.navbar {
+    background-color: #dadada;
+    border: none;
+    box-shadow: 0 6px 12px #dadada;
+}
+
+    .navbar a {
+        color: #2c2c2c;
+    }
+
+        .navbar a:hover {
+            color: #5cb85c;
+        }
