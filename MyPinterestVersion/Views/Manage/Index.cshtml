@@ -56,13 +56,13 @@
             }
         </dd>
         *@
-        <dt>Two-Factor Authentication:</dt>
+        @*<dt>Two-Factor Authentication:</dt>
         <dd>
             <p>
                 There are no two-factor authentication providers configured. See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
                 for details on setting up this ASP.NET application to support two-factor .
             </p>
-            @*@if (Model.TwoFactor)
+            @if (Model.TwoFactor)
             {
                 using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                 {
@@ -81,16 +81,25 @@
                     <input type="submit" value="Enable" class="btn btn-link" />
                     </text>
                 }
-            }*@
+            }
 
-        </dd>
-        <dt>View the bookmarks you created:</dt>
+        </dd>*@
+        <dt>Bookmarks:</dt>
         <dd>
-            @Html.ActionLink("View your bookmarks", "ViewManageBookmark")
+            @Html.ActionLink("View your created bookmarks", "ViewManageBookmark")
         </dd>
-        <dt>View the bookmarks you Saved:</dt>
         <dd>
-            @Html.ActionLink("View your bookmarks", "../CategoryUserBookmarkLink/Index")
+            @Html.ActionLink("View your saved bookmarks", "../CategoryUserBookmarkLink/Index")
+        </dd>
+
+
+
+        <dt>Categories:</dt>
+        <dd>
+            @Html.ActionLink("Vies All Categories", "../Categories/Index")
+        </dd>
+        <dd>
+            @Html.ActionLink("Add a category", "../Categories/New")
         </dd>
     </dl>
 </div>

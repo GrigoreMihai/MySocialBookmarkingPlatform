@@ -110,7 +110,7 @@
         @Html.HiddenFor(m => m.UserId)
         @Html.ValidationSummary(false, "", new { @class = "text-danger" })
         @Html.HiddenFor(m => m.Id)
-        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+      
         @Html.Label("Comment", "Comment Bookmark") <br />
         @Html.TextBox("Comment", null, new { @class = "form-control" })
         @Html.ValidationMessageFor(m => m.Comment, "", new { @class = "text-danger" })
@@ -123,7 +123,7 @@
         @Html.HiddenFor(m => m.UserId)
         @Html.ValidationSummary(false, "", new { @class = "text-danger" })
         @Html.HiddenFor(m => m.Id)
-        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+       
         @Html.Label("Related Url", "Add related url") <br />
         @Html.TextBox("Url", null, new { @class = "form-control" })
         @Html.ValidationMessageFor(m => m.Comment, "", new { @class = "text-danger" })

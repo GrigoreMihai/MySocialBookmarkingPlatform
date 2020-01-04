@@ -6,10 +6,11 @@
 
 @using (Html.BeginForm(actionName: "New", controllerName: "Bookmark"))
 {
+    
     @Html.HiddenFor(m => m.UserId)
     @Html.ValidationSummary(false, "", new { @class = "text-danger" })
     @Html.HiddenFor(m => m.ImageId)
-    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+   
 
     @Html.Label("Title", "Bookmark Title") <br />
     @Html.TextBox("Title", null, new { @class = "form-control" })
@@ -21,7 +22,7 @@
     @Html.ValidationMessage("Description", "", new { @class = "text-danger" }) <br /><br />
 
     @Html.Hidden("Date", DateTime.Now, new { @class = "form-control" }) //for selecting the tag when i add it
-    <label>Selectati categoria</label>
+    <label>Select posible tags fro yours bookmark </label>
     <div class="form-group">
         <table>
             @for (int i = 0; i < Model.Tags.Count(); i++)

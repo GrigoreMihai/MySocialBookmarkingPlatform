@@ -1,0 +1,15 @@
+﻿@model MyPinterestVersion.Models.Category
+@{
+    ViewBag.Title = "Add category";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<form method="post" action="/Categories/New">
+    @Html.Label("Name", "Category Name")
+    <br />
+    @Html.TextBox("Name", null, new { @class = "form-control" })
+    @Html.ValidationMessageFor(model => model.Name, null, new { @class = "text-danger " })
+    <br /><br />
+    <button class="btn btn-sm btn-success" type="submit">Add category</button>
+</form>
