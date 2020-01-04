@@ -1,7 +1,27 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Your saved bookmarks</h2>
+@using PagedList.Mvc;
+@model PagedList.IPagedList<MyPinterestVersion.Models.Bookmark>
+@for (int i = 0; i < Model.Count(); i += 3)
+{
+    <ul class="row list-inline">
+        @{
+            int j = 0;
+            for (; j <= 2 && i + j < Model.Count(); j++)
+            {
+        <li class="col-md-4 list-inline-item">
+            <div style="font-size:1.5em"> Category: <span class="label label-success">@Model[i + j].CategoryName</span> </div>            
+            <br/>
+            @Html.Partial("BookmarkPartial", Model[i + j])
+        </li>
+            }
+        }
+    </ul>
+}
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page }))

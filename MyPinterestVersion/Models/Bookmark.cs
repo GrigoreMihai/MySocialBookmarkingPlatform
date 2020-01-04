@@ -17,6 +17,7 @@ namespace MyPinterestVersion.Models
         [StringLength(20, ErrorMessage = "Titlul nu poate avea mai mult de 20 de caractere")]
         public string Title { get; set; }
         [Required(ErrorMessage = "Descrierea este obligatorie")]
+        [StringLength(20, ErrorMessage = "Titlul nu poate avea mai mult de 20 de caractere")]
         public string Description { get; set; }        
         public int Note { get; set; }          
         public DateTime Date { get; set; }
@@ -41,6 +42,8 @@ namespace MyPinterestVersion.Models
         public DateTime SimilarUrlDate { get; set; }
         [NotMapped]
         public string Url { get; set; }
-      
+        [NotMapped]
+        public string CategoryName { get; set; }
+
     }
 }
