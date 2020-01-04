@@ -17,7 +17,9 @@ namespace MyPinterestVersion.Controllers
         public ActionResult Index()
         {
             return View();
-        }
+        }     
+       
+        [Authorize(Roles = "RegisteredUser,Administrator")]
         public ActionResult VoteUp(int id)
         {
             try
@@ -38,6 +40,7 @@ namespace MyPinterestVersion.Controllers
             }
            
         }
+        [Authorize(Roles = "RegisteredUser,Administrator")]
         public ActionResult VoteDown(int id)
         {
             try
@@ -83,6 +86,31 @@ namespace MyPinterestVersion.Controllers
                 return RedirectToAction("Show", new { id = bookmark.Id});
             }
             
+        }
+        [HttpPost]
+        [Authorize(Roles = "RegisteredUser,Administrator")]
+        public ActionResult AddUrl(Bookmark bookmark)
+        {
+
+            try
+            {
+                SimilarUrl url = new SimilarUrl();
+                url.BookmarkId = bookmark.Id;
+                System.Diagnostics.Debug.WriteLine(bookmark.Comment);
+                url.UrlBody = bookmark.Url;
+                url.UserId = User.Identity.GetUserId();
+                url.Date = bookmark.SimilarUrlDate;
+                db.SimilarUrls.Add(url);
+                db.SaveChanges();
+                TempData["message"] = "Your related url has been added";
+                return RedirectToAction("Show", new { id = bookmark.Id });
+            }
+            catch (Exception e)
+            {
+
+                return RedirectToAction("Show", new { id = bookmark.Id });
+            }
+
         }
         [NonAction]
         public List<SelectListItem> GetAllCategories() //GetAllTags
@@ -170,6 +198,14 @@ namespace MyPinterestVersion.Controllers
                 bookmark.CommentsList = new List<Comment>();
                 bookmark.CommentsList = comments.ToList<Comment>();
                 ViewBag.hasComments = true;
+            }
+            var urls = db.SimilarUrls.Where(m => m.BookmarkId == id);
+
+            if (urls.Count() > 0)
+            {
+                bookmark.SimilarUrls = new List<SimilarUrl>();
+                bookmark.SimilarUrls = urls.ToList<SimilarUrl>();
+                ViewBag.hasUrl = true;
             }
             if (TempData.ContainsKey("message"))
             {

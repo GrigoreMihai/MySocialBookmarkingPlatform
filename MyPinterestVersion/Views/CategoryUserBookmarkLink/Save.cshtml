@@ -1,0 +1,21 @@
+﻿
+@model MyPinterestVersion.Models.CategoryUserBookmarkLink
+
+@{ ViewBag.Titlu = "Save bookmark"; }
+
+<h2>@ViewBag.Titlu</h2> <br />
+
+@using (Html.BeginForm(actionName: "Save", controllerName: "CategoryUserBookmarkLink"))
+{
+    @Html.HiddenFor(m => m.UserId)
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+    @Html.HiddenFor(m => m.BookmarkId)
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+    <label>Select a category in which to save the bookmark</label>
+
+    @Html.DropDownListFor(m => m.CategoryId, new SelectList(Model.Categories, "Value", "Text"), "Selectati categoria", new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.CategoryId, "", new { @class = "text-danger" }) <br />
+
+    <button class="btn btn-sm btn-success" type="submit">Save bookmark under selected category</button>
+}

@@ -25,41 +25,70 @@
 
         @if (Model.CommentsList.Count > 0)
         {
-        <div>
-            Comments:
-            @if (ViewBag.hasComments != null)
-            {
-            if (ViewBag.hasComments)
-            {
-
-            for (int i = 0; i < Model.CommentsList.Count; i++)
-            {
-            <div class="glyphicon-arrow-left">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <strong>@Model.CommentsList[i].User.UserName</strong> <span class="text-muted">@Model.CommentsList[i].Date</span>
-                    </div>
-                    <div class="panel-body">
-                        @Model.CommentsList[i].CommentBody
-                    </div><!-- /panel-body -->
-                </div><!-- /panel panel-default -->
-            </div><!-- /col-sm-5 -->
-            }
-            }
-
-            }
-        </div>
-         }
-           
             <div>
-                <span class="label label-success">@Model.Date</span>
-            </div>
+                Comments:
+                @if (ViewBag.hasComments != null)
+                {
+                    if (ViewBag.hasComments)
+                    {
 
-            <i class="glyphicon glyphicon-user"></i> <i>bookmark added by</i> <strong> @Model.User.UserName </strong>
+                        for (int i = 0; i < Model.CommentsList.Count; i++)
+                        {
+                            <div class="glyphicon-arrow-left">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <strong>@Model.CommentsList[i].User.UserName</strong> <span class="text-muted">@Model.CommentsList[i].Date</span>
+                                    </div>
+                                    <div class="panel-body">
+                                        @Model.CommentsList[i].CommentBody
+                                    </div><!-- /panel-body -->
+                                </div><!-- /panel panel-default -->
+                            </div><!-- /col-sm-5 -->
+                        }
+                    }
+
+                }
+            </div>
+        }
+        @if (Model.SimilarUrls.Count > 0)
+        {
+            <div>
+                Related Urls:
+                @if (ViewBag.hasUrl != null)
+                {
+                    if (ViewBag.hasUrl)
+                    {
+
+                        for (int i = 0; i < Model.SimilarUrls.Count; i++)
+                        {
+                            <div class="glyphicon-arrow-left">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <strong>@Model.SimilarUrls[i].User.UserName</strong> <span class="text-muted">@Model.SimilarUrls[i].Date</span>
+                                    </div>
+                                    <div class="panel-body">
+                                        <a>@Model.SimilarUrls[i].UrlBody</a>
+                                    </div><!-- /panel-body -->
+                                </div><!-- /panel panel-default -->
+                            </div><!-- /col-sm-5 -->
+                        }
+                    }
+
+                }
+            </div>
+        }
+
+        <div>
+            <span class="label label-success">@Model.Date</span>
         </div>
-    <div class="panel-footer">        
-        <a class="btn btn-sm btn-success" href="/Bookmark/Show/@Model.Id">Show bookmark</a>
+
+        <i class="glyphicon glyphicon-user"></i> <i>bookmark added by</i> <strong> @Model.User.UserName </strong>
     </div>
+    <div class="panel-footer">
+        <a class="btn btn-sm btn-success" href="/Bookmark/Show/@Model.Id">Show bookmark</a>
+        <a class="btn btn-sm btn-success" href="/CategoryUserBookmarkLink/Save/@Model.Id">Save bookmark</a>
+    </div>
+ 
 </div>
 <br />
 

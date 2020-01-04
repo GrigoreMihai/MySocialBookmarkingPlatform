@@ -37,6 +37,7 @@ namespace MyPinterestVersion.Models
 
         public DbSet<Comment> Comments { get; set; }
 
+        public DbSet<SimilarUrl> SimilarUrls { get; set; }
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

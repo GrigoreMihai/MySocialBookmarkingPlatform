@@ -42,13 +42,17 @@ namespace MyPinterestVersion.Controllers
                     bookmarks[i].CommentsList = comments.ToList<Comment>();
                     ViewBag.hasComments = true;
                 }
+                var urls = db.SimilarUrls.Where(m => m.BookmarkId == temp);
+                bookmarks[i].SimilarUrls = new List<SimilarUrl>();
+                if (urls.Count() > 0)
+                {
+
+                    bookmarks[i].SimilarUrls = urls.ToList<SimilarUrl>();
+                    ViewBag.hasUrl = true;
+                }
                 var Tags = db.BookmarkTagLinks.Where(c => c.BookmarkId == temp).ToList<BookmarkTagLink>();
 
-                //if (Tags.Capacity == 0)
-                //{
-                //    bookmarks[i].TagsNames = new List<string>(1);
-                //    bookmarks[i].TagsNames.Add("test");
-                //}
+              
                 bookmarks[i].TagsNames = new List<string>();
                 foreach (BookmarkTagLink tag in Tags)
                 {

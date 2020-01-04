@@ -175,6 +175,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BookmarkController.cs" />
+    <Compile Include="Controllers\CategoryUserBookmarkLinkController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -191,6 +192,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\SimilarUrl.cs" />
     <Compile Include="Models\Tag.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -261,6 +263,9 @@
     <Content Include="Views\Image\View.cshtml" />
     <Content Include="Views\Bookmark\New.cshtml" />
     <Content Include="Views\Bookmark\Show.cshtml" />
+    <Content Include="Views\Bookmark\Save.cshtml" />
+    <Content Include="Views\CategoryUserBookmarkLink\Save.cshtml" />
+    <Content Include="Views\CategoryUserBookmarkLink\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

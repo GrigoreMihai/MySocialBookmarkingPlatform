@@ -35,5 +35,12 @@ namespace MyPinterestVersion.Models
         public List<Comment> CommentsList { get; set; }
         [NotMapped]
         public DateTime CommentDate { get; set; }
+        [NotMapped]
+        public List<SimilarUrl> SimilarUrls { get; set; }
+        [NotMapped]
+        public DateTime SimilarUrlDate { get; set; }
+        [NotMapped]
+        public string Url { get; set; }
+      
     }
 }
