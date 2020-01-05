@@ -48,17 +48,18 @@ namespace MyPinterestVersion.Controllers
                 var bookmark = db.Bookmarks.Include("Image").SingleOrDefault(x => x.Id == id);
                 var comments = db.Comments.Where(m => m.BookmarkId == id);
                 bookmark.CategoryName = cat[0];
+                bookmark.CommentsList = new List<Comment>();
                 if (comments.Count() > 0)
                 {
-                    bookmark.CommentsList = new List<Comment>();
+                   
                     bookmark.CommentsList = comments.ToList<Comment>();
                     ViewBag.hasComments = true;
                 }
                 var urls = db.SimilarUrls.Where(m => m.BookmarkId == id);
-
+                bookmark.SimilarUrls = new List<SimilarUrl>();
                 if (urls.Count() > 0)
                 {
-                    bookmark.SimilarUrls = new List<SimilarUrl>();
+                    
                     bookmark.SimilarUrls = urls.ToList<SimilarUrl>();
                     ViewBag.hasUrl = true;
                 }

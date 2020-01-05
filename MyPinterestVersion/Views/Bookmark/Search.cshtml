@@ -1,0 +1,29 @@
+﻿<ul class="list-group">
+    <li style="padding-top:1em; padding-left:3em;" class="list-group-item list-group-item-info">
+        <form asp-controller="Bookmark" asp-action="SearchRedirect" style="color:black;">
+            <p>
+                Search by Title: <input type="text" name="SearchString">
+                <input type="hidden" name="by" value="title" />
+                <input style="color:green" type="submit" value="Search" />
+            </p>
+        </form>
+    </li>
+    <li style="padding-top:1em; padding-left:3em;" class="list-group-item list-group-item-info">
+        <form asp-controller="Bookmark" asp-action="SearchRedirect" style="color:black;">
+            <p>
+                Search by Description: <input type="text" name="SearchString">
+                <input type="hidden" name="by" value="description" />
+                <input style="color:green" type="submit" value="Search" />
+            </p>
+        </form>
+    </li>
+    <li style="padding-top:1em; padding-left:3em;" class="list-group-item list-group-item-info">
+        <form asp-controller="Bookmark" asp-action="SearchRedirect" style="color:black;">
+            <p>
+                Search by Tag: <input type="text" name="SearchString">
+                <input type="hidden" name="by" value="tag" />
+                <input style="color:green" type="submit" value="Search" />
+            </p>
+        </form>
+    </li>
+</ul>

@@ -8,17 +8,25 @@ using System.Web.Mvc;
 
 namespace MyPinterestVersion.Controllers
 {
-    [Authorize(Roles = "RegisteredUser,Administrator")]
+   
     public class BookmarkController : Controller
     {
         
         private ApplicationDbContext db = ApplicationDbContext.Create();
-        // GET: Bookmark
-        public ActionResult Index()
+      
+        public ActionResult Search(string SearchString, string by)
         {
+            
+            if (!String.IsNullOrEmpty(SearchString))
+            {
+                ViewBag.SearchString = SearchString;
+                ViewBag.by = by;
+                return RedirectToAction("../Home/Index", new { SearchString = SearchString, by=by, sortOrder = "Date" });
+            }
             return View();
-        }     
+        }       
        
+
         [Authorize(Roles = "RegisteredUser,Administrator")]
         public ActionResult VoteUp(int id)
         {

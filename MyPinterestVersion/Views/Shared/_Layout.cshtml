@@ -21,19 +21,20 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Show Bookmarks", "Index", "Home")</li>
                     @*<li>@Html.ActionLink("Show Saved Bookmarks", "Index", "CategoryUserBookmarkLink")</li>*@
-                    <li>@Html.ActionLink("Show Categories", "Index", "Categories")</li>
-                    <li>@Html.ActionLink("Show Tags", "Index", "Tag")</li>
-                    <li>@Html.ActionLink("Show Users", "Index", "Users")</li>
-                    <li style="padding-top:1em; padding-left:3em;">
-                        <form asp-controller="Home" asp-action="Index" style="color:white;">
-                            <p>
-                                Search by Tag: <input type="text" name="SearchString">
-                                <input style="color:green" type="submit" value="Search" />
-                            </p>
-                        </form>
-                    </li>
+                    @if (Request.IsAuthenticated)
+                    {
+                        if (User.IsInRole("Administrator"))
+                        {
+                            <li>@Html.ActionLink("Show Categories", "Index", "Categories")</li>
+                            <li>@Html.ActionLink("Show Tags", "Index", "Tag")</li>
+                            <li>@Html.ActionLink("Show Users", "Index", "Users")</li>
+
+                        }
+                    }
+                    <li>@Html.ActionLink("Search", "Search", "Bookmark")</li>
+                   
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -43,7 +44,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Bookmarks Paradise</p>
         </footer>
     </div>
 

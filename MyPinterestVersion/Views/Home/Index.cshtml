@@ -34,7 +34,34 @@
             <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
         </div>
     </div>*@
+    <div style="padding-top:15px">
+        <p style="display:inline-block" class="alert-danger">Sort By: </p>
+        @Html.ActionLink("Date", "Index", new { searchString = Request["SearchString"], by = Request["by"], sortOrder = ViewBag.DateSortParm })
+        @if (ViewBag.DateSortParm != null)
+        {
+            if (Convert.ToBoolean(ViewData["date_desc"]))
+            {
+                <i class="glyphicon glyphicon-arrow-up"></i>
+            }
+            else
+            {
+                <i class="glyphicon glyphicon-arrow-down"></i>
+            }
+        }
+        @Html.ActionLink("Rating", "Index", new { searchString = Request["SearchString"], by = Request["by"], sortOrder = ViewBag.RatingSortParm })
+        @if (ViewBag.DateSortParm != null)
+        {
+            if (Convert.ToBoolean(ViewData["rating_desc"]))
+            {
+                <i class="glyphicon glyphicon-arrow-up"></i>
+            }
+            else
+            {
+                <i class="glyphicon glyphicon-arrow-down"></i>
+            }
+        }
 
+        </div>
 @model PagedList.IPagedList<MyPinterestVersion.Models.Bookmark>
 @for (int i = 0; i < Model.Count(); i += 3)
 {

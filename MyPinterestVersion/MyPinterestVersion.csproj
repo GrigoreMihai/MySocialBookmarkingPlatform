@@ -272,6 +272,7 @@
     <Content Include="Views\Categories\New.cshtml" />
     <Content Include="Views\Categories\Edit.cshtml" />
     <Content Include="Views\Users\Show.cshtml" />
+    <Content Include="Views\Bookmark\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

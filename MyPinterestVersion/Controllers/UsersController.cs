@@ -94,25 +94,79 @@ namespace MyPinterestVersion.Controllers
 
             ViewBag.roleName = roleName;
 
+         
+                var currentUserId = id;
+            var bookCat = db.CategoryUserBookmarkLinks.Where(m => m.UserId == currentUserId).ToList<CategoryUserBookmarkLink>();
+            List<Bookmark> bookmarks = new List<Bookmark>();
+            foreach (CategoryUserBookmarkLink p in bookCat)
+            {
+                var iD = p.BookmarkId;
+                var catId = p.CategoryId;
+                var cat = db.Categories.Where(m => m.Id == catId).Select(m => m.Name).ToList<string>();
+
+                var bookmark = db.Bookmarks.Include("Image").SingleOrDefault(x => x.Id == iD);
+                var comments = db.Comments.Where(m => m.BookmarkId == iD);
+                bookmark.CategoryName = cat[0];
+                bookmark.CommentsList = new List<Comment>();
+                if (comments.Count() > 0)
+                {
+
+                    bookmark.CommentsList = comments.ToList<Comment>();
+                    ViewBag.hasComments = true;
+                }
+                var urls = db.SimilarUrls.Where(m => m.BookmarkId == iD);
+                bookmark.SimilarUrls = new List<SimilarUrl>();
+                if (urls.Count() > 0)
+                {
+
+                    bookmark.SimilarUrls = urls.ToList<SimilarUrl>();
+                    ViewBag.hasUrl = true;
+                }
+                if (TempData.ContainsKey("message"))
+                {
+                    ViewBag.message = TempData["message"].ToString();
+                }
+
+
+
+                var temp = iD;
+                var Tags = db.BookmarkTagLinks.Where(c => c.BookmarkId == temp).ToList<BookmarkTagLink>();
+
+                bookmark.TagsNames = new List<string>();
+
+                foreach (BookmarkTagLink tag in Tags)
+                {
+
+                    var TagsFull = db.Tags.Where(c => c.Id == tag.TagId).Select(c => c.Name).ToList<string>();
+
+                    bookmark.TagsNames.Add(TagsFull[0]);
+                }
+                bookmarks.Add(bookmark);
+            }
+                user.UserBookmarks = bookmarks;
+            
+              
+            
 
             return View(user);
         }
         [HttpDelete]
         public ActionResult Delete(string id)
         {
-            ApplicationUser user = db.Users.Find(id);
-            if (User.IsInRole("Administrator"))
+            ApplicationDbContext context = new ApplicationDbContext();
+            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            var user = UserManager.Users.FirstOrDefault(u => u.Id == id);
+
+            var articles = db.Bookmarks.Where(a => a.UserId == id);
+            foreach (var article in articles)
             {
-                db.Users.Remove(user);
-                db.SaveChanges();
-                TempData["message"] = "userul a fost sters!";
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                TempData["message"] = "Nu aveti dreptul sa stergeti un user";
-                return RedirectToAction("Index");
-            }
+                db.Bookmarks.Remove(article);
+
+            }           
+            db.SaveChanges();
+            UserManager.Delete(user);
+            return RedirectToAction("Index");
+            
         }
     }
 }

@@ -25,6 +25,10 @@
 
 
 
+
+
+
+
     }
 
 </div>
@@ -41,3 +45,32 @@
         }
     </div>
 }
+@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "All user bookmarks";
+}
+<br />
+    <ol class="breadcrumb">
+        <li><h3>@ViewBag.Title</h3></li>
+    </ol>
+@for (int i = 0; i < Model.UserBookmarks.Count(); i += 3)
+{
+    <div class="row">
+        @{
+            int j = 0;
+            for (; j <= 2 && i + j < Model.UserBookmarks.Count(); j++)
+            {
+        <div class="col-md-4">
+            <div style="font-size:1.5em"> Category: <span class="label label-success">@Model.UserBookmarks[i + j].CategoryName</span> </div>
+            <br />
+            @Html.Partial("BookmarkPartial", Model.UserBookmarks[i + j])
+        </div>
+            }
+        }
+    </div>
+}
+
+
+
+
