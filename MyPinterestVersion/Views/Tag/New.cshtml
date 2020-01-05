@@ -1,0 +1,15 @@
+﻿@model MyPinterestVersion.Models.Tag
+@{
+    ViewBag.Title = "Add Tag";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<form method="post" action="/Tag/New">
+    @Html.Label("Name", "Tag Name")
+    <br />
+    @Html.TextBox("Name", null, new { @class = "form-control" })
+    @Html.ValidationMessageFor(model => model.Name, null, new { @class = "text-danger " })
+    <br /><br />
+    <button class="btn btn-sm btn-success" type="submit">Add tag</button>
+</form>

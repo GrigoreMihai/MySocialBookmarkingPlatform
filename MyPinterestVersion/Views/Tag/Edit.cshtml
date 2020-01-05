@@ -1,0 +1,17 @@
+﻿@model MyPinterestVersion.Models.Tag
+@{
+    ViewBag.Title = "Edit tag";
+}
+
+<h2>@ViewBag.Title</h2>
+<form method="post" action="/Tag/Edit/@Model.Id">
+    @Html.HttpMethodOverride(HttpVerbs.Put)
+    <br />
+    @Html.Label("Name", "Tag Name")
+    <br />
+    @Html.EditorFor(m => m.Name)
+    @Html.ValidationMessageFor(model => model.Name, null, new { @class = "text-danger " })
+    <br />
+    <button class="btn btn-sm btn-success" type="submit">Modify this tag</button>
+</form>
+

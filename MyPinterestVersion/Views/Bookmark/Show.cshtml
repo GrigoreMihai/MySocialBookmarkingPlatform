@@ -43,19 +43,28 @@
                 @if (ViewBag.hasComments)
                 {
 
-                for (int i = 0; i < Model.CommentsList.Count; i++)
-                {
-                <div class="glyphicon-arrow-left">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <strong>@Model.CommentsList[i].User.UserName</strong> <span class="text-muted">@Model.CommentsList[i].Date</span>
-                        </div>
-                        <div class="panel-body">
-                            @Model.CommentsList[i].CommentBody
-                        </div><!-- /panel-body -->
-                    </div><!-- /panel panel-default -->
-                </div><!-- /col-sm-5 -->
-                }
+                    for (int i = 0; i < Model.CommentsList.Count; i++)
+                    {
+                        <div class="glyphicon-arrow-left">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <strong>@Model.CommentsList[i].User.UserName</strong> <span class="text-muted">@Model.CommentsList[i].Date</span>
+                                </div>
+                                <div class="panel-body">
+                                    @Model.CommentsList[i].CommentBody
+                                    @if (ViewBag.esteAdmin)
+                                    {
+                                    <form method="post" action="/Comment/Delete/@Model.CommentsList[i].Id">
+                                        @Html.HttpMethodOverride(HttpVerbs.Delete)
+                                        <input type="hidden" name="bookId" value=@Model.Id />
+                                        <button class="btn btn-sm btn-danger" type="submit">Delete Comment</button>
+                                    </form>
+                                    }
+
+                                </div><!-- /panel-body -->
+                            </div><!-- /panel panel-default -->
+                        </div><!-- /col-sm-5 -->
+                    }
                 }
             </div>
         }
@@ -67,19 +76,27 @@
                 @if (ViewBag.hasUrl)
                 {
 
-                for (int i = 0; i < Model.SimilarUrls.Count; i++)
-                {
-                <div class="glyphicon-arrow-left">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <strong>@Model.SimilarUrls[i].User.UserName</strong> <span class="text-muted">@Model.SimilarUrls[i].Date</span>
-                        </div>
-                        <div class="panel-body">
-                            <a>@Model.SimilarUrls[i].UrlBody</a>
-                        </div><!-- /panel-body -->
-                    </div><!-- /panel panel-default -->
-                </div><!-- /col-sm-5 -->
-                }
+                    for (int i = 0; i < Model.SimilarUrls.Count; i++)
+                    {
+                        <div class="glyphicon-arrow-left">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <strong>@Model.SimilarUrls[i].User.UserName</strong> <span class="text-muted">@Model.SimilarUrls[i].Date</span>
+                                </div>
+                                <div class="panel-body">
+                                    <a>@Model.SimilarUrls[i].UrlBody</a>
+                                    @if (ViewBag.esteAdmin)
+                                    {
+                                    <form method="post" action="/SimilarUrl/Delete/@Model.SimilarUrls[i].Id">
+                                        @Html.HttpMethodOverride(HttpVerbs.Delete)
+                                        <input type="hidden" name="bookId" value=@Model.Id />
+                                        <button class="btn btn-sm btn-danger" type="submit">Delete Url Response</button>
+                                    </form>
+                                    }
+                                </div><!-- /panel-body -->
+                            </div><!-- /panel panel-default -->
+                        </div><!-- /col-sm-5 -->
+                    }
                 }
             </div>
         }
@@ -93,9 +110,7 @@
 </div>
 <br />
 @if (ViewBag.esteAdmin)
-{<a class="btn btn-sm btn-info" href="/Bookmark/Edit/@Model.Id">Modifica articol</a>
-    <br />
-
+{
     <form method="post" action="/Bookmark/Delete/@Model.Id">
         @Html.HttpMethodOverride(HttpVerbs.Delete)
         <button class="btn btn-sm btn-danger" type="submit">Delete Bookmark</button>
@@ -110,7 +125,7 @@
         @Html.HiddenFor(m => m.UserId)
         @Html.ValidationSummary(false, "", new { @class = "text-danger" })
         @Html.HiddenFor(m => m.Id)
-      
+
         @Html.Label("Comment", "Comment Bookmark") <br />
         @Html.TextBox("Comment", null, new { @class = "form-control" })
         @Html.ValidationMessageFor(m => m.Comment, "", new { @class = "text-danger" })
@@ -123,7 +138,7 @@
         @Html.HiddenFor(m => m.UserId)
         @Html.ValidationSummary(false, "", new { @class = "text-danger" })
         @Html.HiddenFor(m => m.Id)
-       
+
         @Html.Label("Related Url", "Add related url") <br />
         @Html.TextBox("Url", null, new { @class = "form-control" })
         @Html.ValidationMessageFor(m => m.Comment, "", new { @class = "text-danger" })

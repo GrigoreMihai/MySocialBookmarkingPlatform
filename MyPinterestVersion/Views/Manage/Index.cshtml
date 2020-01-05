@@ -92,14 +92,16 @@
             @Html.ActionLink("View your saved bookmarks", "../CategoryUserBookmarkLink/Index")
         </dd>
 
+        @if (User.IsInRole("Administrator"))
+        {
 
-
-        <dt>Categories:</dt>
+            <dt>Categories:</dt>
         <dd>
             @Html.ActionLink("Vies All Categories", "../Categories/Index")
         </dd>
         <dd>
             @Html.ActionLink("Add a category", "../Categories/New")
         </dd>
+        }
     </dl>
 </div>

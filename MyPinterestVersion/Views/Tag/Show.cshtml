@@ -1,0 +1,22 @@
+﻿@model MyPinterestVersion.Models.Tag
+
+
+@{
+    ViewBag.Title = "Tag display";
+}
+
+<h2>@ViewBag.Title</h2>
+<h1>@Model.Name</h1>
+<br />
+
+<a class="btn btn-sm btn-info" href="/Tag/Edit/@Model.Id">Edit tag</a>
+<br /><br />
+<form method="post" action="/Tag/Delete/@Model.Id">
+    @Html.HttpMethodOverride(HttpVerbs.Delete)
+    <button class="btn btn-sm btn-danger" type="submit">Delete Tag</button>
+</form>
+
+<hr />
+<a class="btn btn-sm btn-success" href="/Tag/Index">Back to Tags</a>
+<br />
+

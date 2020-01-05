@@ -177,9 +177,12 @@
     <Compile Include="Controllers\BookmarkController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\CategoryUserBookmarkLinkController.cs" />
+    <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\SimilarUrlController.cs" />
+    <Compile Include="Controllers\TagController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -273,10 +276,16 @@
     <Content Include="Views\Categories\Edit.cshtml" />
     <Content Include="Views\Users\Show.cshtml" />
     <Content Include="Views\Bookmark\Search.cshtml" />
+    <Content Include="Views\Tag\Edit.cshtml" />
+    <Content Include="Views\Tag\Index.cshtml" />
+    <Content Include="Views\Tag\New.cshtml" />
+    <Content Include="Views\Tag\Show.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Image\" />
+    <Folder Include="Views\Comment\" />
+    <Folder Include="Views\SimilarUrl\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

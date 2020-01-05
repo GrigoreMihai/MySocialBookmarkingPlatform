@@ -245,5 +245,28 @@ namespace MyPinterestVersion.Controllers
             
             return View(bookmark);
         }
+        [HttpDelete]
+        [Authorize(Roles = "Administrator")]
+        public ActionResult Delete(int id)
+        {
+            Bookmark article = db.Bookmarks.Find(id);
+            List<Comment> com = db.Comments.Where(m => m.BookmarkId == id).ToList<Comment>();
+            List<SimilarUrl> sim = db.SimilarUrls.Where(m => m.BookmarkId == id).ToList<SimilarUrl>();
+            foreach (var c in com)
+            {
+                db.Comments.Remove(c);
+            }
+            foreach (var c in sim)
+            {
+                db.SimilarUrls.Remove(c);
+            }
+            db.Bookmarks.Remove(article);
+             db.SaveChanges();
+             TempData["message"] = "Bookmark-ul a fost sters!";
+             return RedirectToAction("../Home/Index");
+          
+        
+
+        }
     }
 }

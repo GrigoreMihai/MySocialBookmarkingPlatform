@@ -33,7 +33,7 @@
 
 </div>
 
-@if (Model.Id != ViewBag.utilizatorCurent)
+@if ( User.IsInRole("Administrator") )
 {
     <div class="panel-footer">
         @using (Html.BeginForm(actionName: "Delete", controllerName: "Users", routeValues: new { id = @Model.Id }))
