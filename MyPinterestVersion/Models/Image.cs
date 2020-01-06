@@ -12,6 +12,7 @@ namespace MyPinterestVersion.Models
     {
         [Key]
         public int ImageID { get; set; }
+
         public string Url { get; set; }
         [DisplayName("Upload File")]
         public string ImagePath { get; set; }

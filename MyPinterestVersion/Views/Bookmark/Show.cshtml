@@ -84,7 +84,7 @@
                                     <strong>@Model.SimilarUrls[i].User.UserName</strong> <span class="text-muted">@Model.SimilarUrls[i].Date</span>
                                 </div>
                                 <div class="panel-body">
-                                    <a>@Model.SimilarUrls[i].UrlBody</a>
+                                    <a href="@Model.SimilarUrls[i].UrlBody">@Model.SimilarUrls[i].UrlBody</a>
                                     @if (ViewBag.esteAdmin)
                                     {
                                     <form method="post" action="/SimilarUrl/Delete/@Model.SimilarUrls[i].Id">
