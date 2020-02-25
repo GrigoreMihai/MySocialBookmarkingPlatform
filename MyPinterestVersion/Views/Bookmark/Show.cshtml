@@ -14,6 +14,9 @@
     <div class="panel-body">
         Description: <strong>@Model.Description</strong>
         <br />
+        <div class="panel-body">
+           Source Url: <a href="@Model.Image.Url">@Model.Image.Url</a>
+        </div>
         <div>
             <img src="@Url.Content(Model.Image.ImagePath)" width="250" height="250" multiple />
         </div>
@@ -54,11 +57,11 @@
                                     @Model.CommentsList[i].CommentBody
                                     @if (ViewBag.esteAdmin)
                                     {
-                                    <form method="post" action="/Comment/Delete/@Model.CommentsList[i].Id">
-                                        @Html.HttpMethodOverride(HttpVerbs.Delete)
-                                        <input type="hidden" name="bookId" value=@Model.Id />
-                                        <button class="btn btn-sm btn-danger" type="submit">Delete Comment</button>
-                                    </form>
+                                        <form method="post" action="/Comment/Delete/@Model.CommentsList[i].Id">
+                                            @Html.HttpMethodOverride(HttpVerbs.Delete)
+                                            <input type="hidden" name="bookId" value=@Model.Id />
+                                            <button class="btn btn-sm btn-danger" type="submit">Delete Comment</button>
+                                        </form>
                                     }
 
                                 </div><!-- /panel-body -->
@@ -87,11 +90,11 @@
                                     <a href="@Model.SimilarUrls[i].UrlBody">@Model.SimilarUrls[i].UrlBody</a>
                                     @if (ViewBag.esteAdmin)
                                     {
-                                    <form method="post" action="/SimilarUrl/Delete/@Model.SimilarUrls[i].Id">
-                                        @Html.HttpMethodOverride(HttpVerbs.Delete)
-                                        <input type="hidden" name="bookId" value=@Model.Id />
-                                        <button class="btn btn-sm btn-danger" type="submit">Delete Url Response</button>
-                                    </form>
+                                        <form method="post" action="/SimilarUrl/Delete/@Model.SimilarUrls[i].Id">
+                                            @Html.HttpMethodOverride(HttpVerbs.Delete)
+                                            <input type="hidden" name="bookId" value=@Model.Id />
+                                            <button class="btn btn-sm btn-danger" type="submit">Delete Url Response</button>
+                                        </form>
                                     }
                                 </div><!-- /panel-body -->
                             </div><!-- /panel panel-default -->

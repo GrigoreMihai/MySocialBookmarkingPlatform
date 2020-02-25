@@ -21,7 +21,7 @@ namespace MyPinterestVersion.Controllers
             {
                 ViewBag.SearchString = SearchString;
                 ViewBag.by = by;
-                return RedirectToAction("../Home/Index", new { SearchString = SearchString, by=by, sortOrder = "Date" });
+                return RedirectToAction("../Invoice/Index", new { SearchString = SearchString, by=by, sortOrder = "Date" });
             }
             return View();
         }       

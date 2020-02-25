@@ -3,6 +3,9 @@
     <div class="panel-body">
         Description: <strong>@Model.Description</strong>
         <br />
+        <div class="panel-body">
+          Source Url:  <a href="@Model.Image.Url">@Model.Image.Url</a>
+        </div>
         <div>
             <img src="@Url.Content(Model.Image.ImagePath)" width="250" height="250" multiple />
         </div>
@@ -84,11 +87,15 @@
 
         <i class="glyphicon glyphicon-user"></i> <i>bookmark added by</i> <strong> @Model.User.UserName </strong>
     </div>
+    @if (Request.IsAuthenticated)
+    {
+
     <div class="panel-footer">
         <a class="btn btn-sm btn-success" href="/Bookmark/Show/@Model.Id">Show bookmark</a>
         <a class="btn btn-sm btn-success" href="/CategoryUserBookmarkLink/Save/@Model.Id">Save bookmark</a>
     </div>
- 
+    }
+
 </div>
 <br />
 
