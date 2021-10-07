@@ -1,0 +1,4 @@
+{ 
+    "aggressiveCompression": "true",    
+    "minKBReduced": 7 // set reduction threshold (default to 10)
+}
