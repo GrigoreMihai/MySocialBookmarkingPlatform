@@ -1,8 +1,8 @@
 { 
     "aggressiveCompression": "true",    
     "minKBReduced": 7,    
-    pr_title : "test",
-    pr_body : "whatever",
-    labels: "enhancement"
+    "pr_title" : "test",
+    "pr_body" : "whatever",
+    "labels": "enhancement"
 
 }
