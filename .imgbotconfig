@@ -1,8 +1,14 @@
 { 
     "aggressiveCompression": "true",    
+    "ignoredFiles": [
+    	"public/special_images/*", // by folderpath
+    ],
     "minKBReduced": 7,    
     "pr_title" : "test",
     "pr_body" : "whatever",
-    "labels": "enhancement"
+    "labels": [ 
+        "enhancement",
+        "whatever",
+     ]
 
 }
