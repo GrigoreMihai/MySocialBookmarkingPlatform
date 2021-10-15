@@ -6,9 +6,5 @@
     "minKBReduced": 7,    
     "pr_title" : "test",
     "pr_body" : "whatever7",
-    "labels": [ 
-        "enhancement",
-        "whatevertest",
-     ]
-
+    "labels": "enhancement, whatever",
 }
