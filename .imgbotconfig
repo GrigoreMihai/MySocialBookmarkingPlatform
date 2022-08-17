@@ -4,7 +4,4 @@
     	"public/special_images/*", // by folderpath  
     ],
     "minKBReduced": 0,    
-    "prTitle" : "Title will appear here",        
-    "prBody" : " Text before optimization ratio {optimization_ratio} Text after optimization ratio 
-                Text before optimization details {optimization_details} Text after optimization details",
 }
