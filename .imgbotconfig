@@ -3,5 +3,5 @@
     "ignoredFiles": [
     	"public/special_images/*", // by folderpath  
     ],
-    "minKBReduced": 0,    
+    "minKBReduced": 0,     
 }
