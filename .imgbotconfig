@@ -1,7 +1,5 @@
 { 
     "aggressiveCompression": "true",    
-    "ignoredFiles": [
-    	"public/special_images/*",
-    ],
+
     "minKBReduced": 0,            
 }
