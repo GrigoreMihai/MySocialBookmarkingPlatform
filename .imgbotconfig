@@ -1,7 +1,7 @@
 { 
     "aggressiveCompression": "true",    
     "ignoredFiles": [
-    	"public/special_images/*", // by folderpath  
+    	"public/special_images/*",
     ],
     "minKBReduced": 0,            
 }
